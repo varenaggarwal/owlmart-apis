@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors')
+
 const productsRouter = require('./product.router');
 const cartRouter = require('./cart.router');
 const wishlistRouter = require('./wishlist.router');
@@ -7,6 +9,7 @@ const categoriesRouter = require('./categories.router');
 
 const app = express();
 
+app.use(cors())
 app.use(bodyParser.json())
 
 app.use('/products' , productsRouter)

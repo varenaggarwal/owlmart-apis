@@ -4,7 +4,7 @@ const {wishlist} = require('./data')
 
 router.route('/')
 .get((req,res) => {
-  res.json({wishlist})
+  res.json({success: true , wishlist})
 })
 
 module.exports = router

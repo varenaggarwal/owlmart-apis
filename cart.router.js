@@ -4,7 +4,7 @@ const {cart} = require('./data')
 
 router.route('/')
 .get((req,res) => {
-  res.json({cart})
+  res.json({success: true , cart})
 })
 .post((req , res) => {
   res.json({success : true , cart})
