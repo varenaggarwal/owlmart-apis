@@ -11,8 +11,8 @@ const initializeDBConnection = async () => {
     });
     console.log("mongoose connection succesfull");
 
-  }catch{
-    console.error("mongoose connection failed")
+  }catch(err){
+    console.error({message : "mongoose connection failed" , errorMessage : err.message})
   }
 }
 
