@@ -1,16 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
 
-const productsRouter = require('./product.router');
-const cartRouter = require('./cart.router');
-const wishlistRouter = require('./wishlist.router');
-const categoriesRouter = require('./categories.router');
+const requestLogger = require('./middlewares/requestLogger.middleware');
+const fallback404Middleware = require('./middlewares/fallback404.middleware')
+const errorHandler = require('./middlewares/errorHandler.middleware')
+
+const productsRouter = require('./routers/product.router');
+const cartRouter = require('./routers/cart.router');
+const wishlistRouter = require('./routers/wishlist.router');
+const categoriesRouter = require('./routers/categories.router');
 
 const app = express();
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use(requestLogger)
 
 app.use('/products' , productsRouter)
 app.use('/cart' , cartRouter)
@@ -18,9 +23,23 @@ app.use('/wishlist' , wishlistRouter)
 app.use('/categories' , categoriesRouter)
 
 app.get('/', (req, res) => {
+    // throw Error("there's something wrong with Varen")
   res.json({success : true , message : "Welocome to Product Central"})
 });
 
+
+
+/**
+ * 404 Route Handler
+ * Note: DO not MOVE. This should be the last route
+ */
+app.use(fallback404Middleware)
+
+/*
+ * Erorr Handler
+ * DO NOT MOVE
+ */
+app.use(errorHandler)
 
 app.listen(3000, () => {
   console.log('server started');

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {wishlist} = require('./data')
+const {wishlist} = require('../data')
 
 router.route('/')
 .get((req,res) => {
