@@ -1,11 +1,9 @@
 const mongoose = require("mongoose")
 
 const initializeDBConnection = async () => {
-  
-  const uri = "mongodb+srv://VarenAdmin:fR-Y34vRbHggMuP@cluster0.nos4a.mongodb.net/inventory?retryWrites=true&w=majority"
-  
+
   try{
-    await mongoose.connect(uri , {
+    await mongoose.connect(process.env.MONGO_DB_URI , {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
