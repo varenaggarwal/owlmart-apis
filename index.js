@@ -11,11 +11,17 @@ const cartRouter = require('./routers/cart.router');
 const wishlistRouter = require('./routers/wishlist.router');
 const categoriesRouter = require('./routers/categories.router');
 
+const initializeDBConnection = require('./db/db.connect')
+
+const PORT = 3000;
 const app = express();
 
 app.use(cors())
 app.use(bodyParser.json())
 app.use(requestLogger)
+
+// called before any route handler
+initializeDBConnection()
 
 app.use('/products' , productsRouter)
 app.use('/cart' , cartRouter)
@@ -23,11 +29,8 @@ app.use('/wishlist' , wishlistRouter)
 app.use('/categories' , categoriesRouter)
 
 app.get('/', (req, res) => {
-    // throw Error("there's something wrong with Varen")
   res.json({success : true , message : "Welocome to Product Central"})
 });
-
-
 
 /**
  * 404 Route Handler
@@ -41,6 +44,6 @@ app.use(fallback404Middleware)
  */
 app.use(errorHandler)
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('server started');
 });
