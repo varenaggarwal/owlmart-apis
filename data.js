@@ -17,6 +17,6 @@ const cart = [];
 const wishlist = [];
 const categories = [];
 
-const data = {cart , wishlist ,categories, productsData}
+const data = { cart, wishlist, categories, productsData }
 
 module.exports = data

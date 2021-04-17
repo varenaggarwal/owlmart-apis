@@ -23,13 +23,13 @@ app.use(requestLogger)
 // called before any route handler
 initializeDBConnection()
 
-app.use('/products' , productsRouter)
-app.use('/cart' , cartRouter)
-app.use('/wishlist' , wishlistRouter)
-app.use('/categories' , categoriesRouter)
+app.use('/products', productsRouter)
+app.use('/cart', cartRouter)
+app.use('/wishlist', wishlistRouter)
+app.use('/categories', categoriesRouter)
 
 app.get('/', (req, res) => {
-  res.json({success : true , message : "Welocome to Product Central"})
+  res.json({ success: true, message: "Welocome to Product Central" })
 });
 
 /**

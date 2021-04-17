@@ -1,3 +1,3 @@
-# Product Central APIs
+# OwlMart APIs
 
-Exxpress server and APIs for the Product Central , a e-commerce Web application.
+Express server and APIs for the OwlMart , a e-commerce Web application
