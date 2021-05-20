@@ -9,7 +9,7 @@ const errorHandler = require('./middlewares/errorHandler.middleware')
 const productsRouter = require('./routers/product.router');
 const cartRouter = require('./routers/cart.router');
 const wishlistRouter = require('./routers/wishlist.router');
-const categoriesRouter = require('./routers/categories.router');
+
 
 const initializeDBConnection = require('./db/db.connect')
 
@@ -26,10 +26,10 @@ initializeDBConnection()
 app.use('/products', productsRouter)
 app.use('/cart', cartRouter)
 app.use('/wishlist', wishlistRouter)
-app.use('/categories', categoriesRouter)
+
 
 app.get('/', (req, res) => {
-  res.json({ success: true, message: "Welocome to Product Central" })
+  res.json({ success: true, message: "Welocome to Owl Mart" })
 });
 
 /**

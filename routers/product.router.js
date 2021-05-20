@@ -1,48 +1,22 @@
 const faker = require('faker');
 const express = require('express')
 const router = express.Router()
-const { productsData } = require('../data')
 const { Product } = require('../models/product.model')
 
+const {
+  getAllProductsFromDB,
+  getProductByIdFromDB,
+  sendProductDetails,
+  createNewProduct
+} = require('../controlers/products.controller')
+
 router.route('/')
-  .get(async (req, res) => {
-    try {
-      const products = await Product.find({});
-      res.json({ success: true, products })
-    } catch (err) {
-      res.status(500).json({ success: false, message: "unable to get products", errorMessage: err.message })
-    }
-  })
-  .post(async (req, res) => {
-    try {
-      const product = req.body;
-      const newProduct = new Product(product);
-      const savedProduct = await newProduct.save();
-      res.json({ success: true, savedProduct })
-    } catch (err) {
-      res.status(500).json({ success: false, message: "unable to add products", errorMessage: err.message })
-    }
-  })
+  .get(getAllProductsFromDB)
+  .post(createNewProduct)
 
-router.route('/:id')
-  .get(async (req, res) => {
-    try {
-      const { id } = req.params
-      const product = await Product.find({
-        _id: id,
-      })
-      res.json({
-        success: true,
-        product
-      })
+router.param("productId", getProductByIdFromDB)
 
-    } catch (err) {
-      res.status(500).json({
-        success: false,
-        message: "unable to fetch the product",
-        errorMessage: err.message,
-      })
-    }
-  })
+router.route('/:productId')
+  .get(sendProductDetails)
 
 module.exports = router
